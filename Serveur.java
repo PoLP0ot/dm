@@ -1,5 +1,6 @@
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.EOFException;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -41,7 +42,27 @@ public class Serveur {
 
                 out.writeUTF("Bienvenue " + playerName + "!");
                 
-                //output.writeObject(sharedmatrix);
+                // Envoyer la dimension de la matrice
+                out.writeUTF(Protocol.MATRIX_DIM.name());
+                out.writeInt(sharedmatrix.getDim());
+
+                // Envoyer les données de la matrice
+                out.writeUTF(Protocol.MATRIX_DATA.name());
+                for(int i=0; i<sharedmatrix.getDim(); i++) {
+                    for(int j=0; j<sharedmatrix.getDim(); j++) {
+                        out.writeBoolean(sharedmatrix.getNum(i, j));
+                    }
+                }
+                 while(true) {
+                // Ajoutez une gestion des exceptions ici pour gérer EOFException
+                try {
+                    Protocol protocol = Protocol.valueOf(in.readUTF());
+                    // Gérer les messages entrants ici
+                } catch (EOFException e) {
+                    System.out.println("Client déconnecté");
+                    break;
+                }
+            }
             } catch (IOException e) {
                 e.printStackTrace();
             }

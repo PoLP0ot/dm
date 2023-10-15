@@ -47,12 +47,8 @@ public static void main(String args[ ]){
             DataOutputStream out = new DataOutputStream(sock.getOutputStream());
             DataInputStream in = new DataInputStream(sock.getInputStream())
             ){
-            
-                 
-            out.writeUTF(playerName);
-            String welcomeMessage = in.readUTF();
-            System.out.println(welcomeMessage);
-
+                // Écoute des messages du serveur dans un nouveau thread
+                new Thread(new ClientHandler(sock, playerName)).start();
 ;
         } catch (UnknownHostException e) {
             System.out.println("L'hôte est inconnu");
@@ -60,5 +56,7 @@ public static void main(String args[ ]){
             e.printStackTrace();
         }
     }
+
+    
 }
 

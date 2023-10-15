@@ -44,14 +44,15 @@ public static void main(String args[ ]){
 
     public static void connectToServer(String playerName) {
         try (Socket sock = new Socket("localhost", 10000);
-             DataOutputStream out = new DataOutputStream(sock.getOutputStream());
-             DataInputStream in = new DataInputStream(sock.getInputStream()))
-            {
+            DataOutputStream out = new DataOutputStream(sock.getOutputStream());
+            DataInputStream in = new DataInputStream(sock.getInputStream())
+            ){
+            
                  
             out.writeUTF(playerName);
             String welcomeMessage = in.readUTF();
             System.out.println(welcomeMessage);
-                 
+
 ;
         } catch (UnknownHostException e) {
             System.out.println("L'hôte est inconnu");

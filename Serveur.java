@@ -18,25 +18,30 @@ public class Serveur {
             
             while (clientcount < 2) {
                 Socket socket = serverSocket.accept();
-                handleClient(socket, sharedmatrix);
+                clients.add(socket);
+                handleClient(socket);
                 clientcount++;
+                
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static void handleClient(Socket socket, Matrix sharedmatrix) {
+    private static void handleClient(Socket socket) {
         new Thread(() -> {
-            try (DataInputStream input = new DataInputStream(socket.getInputStream());
-                 DataOutputStream output = new DataOutputStream(socket.getOutputStream())) {
-                 
-                String playerName = input.readUTF();
+            try (
+                DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+                DataInputStream in = new DataInputStream(socket.getInputStream())
+                 ){
+
+
+                String playerName = in.readUTF();
                 System.out.println("Joueur connecté: " + playerName);
 
-                output.writeUTF("Bienvenue " + playerName + "!");
+                out.writeUTF("Bienvenue " + playerName + "!");
                 
-                
+                //output.writeObject(sharedmatrix);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -44,6 +49,8 @@ public class Serveur {
     }
 
 }
+
+
 
 
 

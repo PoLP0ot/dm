@@ -1,7 +1,7 @@
  
 import java.util.Random;
 
-public class Matrix{
+public class Matrix implements java.io.Serializable{
 
     private boolean[][] cases;
     private  static int DIMDEF = 3;
@@ -48,7 +48,7 @@ public class Matrix{
     int getnbMines(){
         return NBM;
     }
-    
+
     public void setNum(int x, int y, boolean value){
         cases[x][y] = value;
     }

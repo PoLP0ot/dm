@@ -1,14 +1,17 @@
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import java.awt.*;
-import java.awt.event.ActionEvent;
 import javax.swing.Timer;
 
 
@@ -224,19 +227,19 @@ public void revealAllMines() {
         // Si le joueur clique sur annuler
         if (playerName == null || playerName.trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Nom invalide", "Erreur", JOptionPane.ERROR_MESSAGE);
-            return; // ou gérer autrement selon vos besoins
+             // ou gérer autrement selon vos besoins
         }
 
         // Boîte de dialogue pour choisir un niveau
-        String[] options = {"Facile", "Moyen", "Difficile"};
+        /*String[] options = {"Facile", "Moyen", "Difficile"};
         JComboBox<String> combo = new JComboBox<>(options);
         String msg = "Choisissez un niveau:";
         Object[] messages = {msg, combo};
         JOptionPane.showMessageDialog(null, messages, "Niveau", JOptionPane.PLAIN_MESSAGE);
 
-        String level = (String) combo.getSelectedItem();
+        String level = (String) combo.getSelectedItem();*/
 
-        Main.connecttoserver(playerName);
+        Main.connectToServer(playerName);
     }
 }
 

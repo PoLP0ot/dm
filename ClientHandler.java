@@ -18,14 +18,14 @@ class ClientHandler implements Runnable {
         public void run() {
             try (DataInputStream input = new DataInputStream(socket.getInputStream());
                  DataOutputStream output = new DataOutputStream(socket.getOutputStream())) {
-                
+                    System.out.println("ClientHandler démarré pour le client: " + clientId);
                 // Lire le nom du joueur
                  String playerName = "";
                 System.out.println("Joueur connecté: " + playerName);
 
                ;
 
-        while(true) {
+        //while(true) {
             Protocol protocol = Protocol.valueOf(input.readUTF());
             switch(protocol) {
                 case PLAYERNAME:
@@ -46,9 +46,8 @@ class ClientHandler implements Runnable {
                     break;
                 case END:
                     System.out.println(playerName + " a quitté la partie.");
-                    socket.close();
                     return;
-            }}}   catch (IOException e) {
+            }}   catch (IOException e) {
                 e.printStackTrace();
             } finally {
                 try {

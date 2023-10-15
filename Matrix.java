@@ -49,6 +49,10 @@ public class Matrix{
         return NBM;
     }
     
+    public void setNum(int x, int y, boolean value){
+        cases[x][y] = value;
+    }
+    
     /**
      * place randomly mines
      */
